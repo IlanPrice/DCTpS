@@ -1,6 +1,6 @@
 # DCT plus Sparse (DCTpS)
 
-This code base is for running the experiments in "Dense for the Price of Sparse: Improving performance of sparsely initialised networks via a subspace offset". 
+This code base is for running the experiments in "Dense for the Price of Sparse: Improving performance of sparsely initialised networks via a subspace offset", available at http://arxiv.org/abs/2102.07655.
 
 One can select DCTpS or standard versions of the architectures reported in the paper:
 
