@@ -50,7 +50,7 @@ Two things to remember when running experiments with DCTpS networks is to add sp
 
 ## Acknowledgements
 
-The experimental setup in this code was originally adapted from code published by the authors of the recent paper (2), and takes the implementations of MobileNetv2 and Fixup ResNets from their respective public implementations (3, 4). The RigL implementation was adapted from the its pytorch implementation (5).
+The experimental setup in this code was originally adapted from code published by the authors of the recent paper (2), and takes the implementations of MobileNetv2 and Fixup ResNets from their respective public implementations (3, 4). The RigL implementation was adapted from its pytorch implementation (5).
 
 _______
 
