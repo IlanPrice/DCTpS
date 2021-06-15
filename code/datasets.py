@@ -23,8 +23,25 @@ def get_cifar_train_valid_loader(batch_size,
                                dataset_name='CIFAR10',
                                centre_and_scale = True):
     """
-    Returns:
-
+    Utility function for loading and returning train and valid
+    multi-process iterators over the CIFAR-10 dataset. A sample
+    9x9 grid of the images can be optionally displayed.
+    If using CUDA, num_workers should be set to 1 and pin_memory to True.
+    Params
+    ------
+    - data_dir: path directory to the dataset.
+    - batch_size: how many samples per batch to load.
+    - augment: whether to apply the data augmentation scheme
+      mentioned in the paper. Only applied on the train split.
+    - random_seed: fix seed for reproducibility.
+    - valid_size: percentage split of the training set used for
+      the validation set. Should be a float in the range [0, 1].
+    - shuffle: whether to shuffle the train/validation indices.
+    - num_workers: number of subprocesses to use when loading the dataset.
+    - pin_memory: whether to copy tensors into CUDA pinned memory. Set it to
+      True if using GPU.
+    Returns
+    -------
     - train_loader: training set iterator.
     - valid_loader: validation set iterator.
     """
@@ -147,8 +164,19 @@ def get_cifar_test_loader(batch_size,
                     dataset_name='CIFAR10',
                     centre_and_scale = True):
     """
-    Returns:
-
+    Utility function for loading and returning a multi-process
+    test iterator over the CIFAR-10 dataset.
+    If using CUDA, num_workers should be set to 1 and pin_memory to True.
+    Params
+    ------
+    - data_dir: path directory to the dataset.
+    - batch_size: how many samples per batch to load.
+    - shuffle: whether to shuffle the dataset after every epoch.
+    - num_workers: number of subprocesses to use when loading the dataset.
+    - pin_memory: whether to copy tensors into CUDA pinned memory. Set it to
+      True if using GPU.
+    Returns
+    -------
     - data_loader: test set iterator.
     """
     if dataset_name=='CIFAR10':
@@ -203,13 +231,8 @@ def get_tiny_imagenet_train_valid_loader(batch_size,
                                            augment,
                                            shuffle=True,
                                            num_workers=1):
-    """
-    Needs to have Tiny Imagenet already downloaded in ../data/.
-    Run 'get_tiny_imagenet.sh' from inside ./data/ before running these experiments
-    Returns train, test and val dataloaders - but since there are no test labels for Tiny Imagenet's test set,
-    both test and val dataloaders use validation data.
-    """
-
+    
+    print(torchvision.__version__)
     root = '../data'
     tiny_mean = [0.48024578664982126, 0.44807218089384643, 0.3975477478649648]
     tiny_std = [0.2769864069088257, 0.26906448510256, 0.282081906210584]

@@ -1,7 +1,6 @@
-# masking function from FORCE implementation: https://github.com/naver/force
-
 import torch.nn as nn
 import numpy as np
+# from IPython import embed
 
 def apply_prune_mask(net, keep_masks):
     """
@@ -10,10 +9,13 @@ def apply_prune_mask(net, keep_masks):
     mask[i] == 1 --> Keep parameter
     """
 
+    # Before I can zip() layers and pruning masks I need to make sure they match
+    # one-to-one by removing all non-prunable modules:
     prunable_layers = filter(
         lambda layer: (type(layer) == nn.Conv2d) or (type(layer) == nn.Linear), net.modules())
 
-
+    # List of hooks to be applied on the gradients. It's useful to save them in order to remove
+    # them later
     hook_handlers = []
     for layer, keep_mask in zip(prunable_layers, keep_masks):
         assert (layer.weight.shape == keep_mask.shape)

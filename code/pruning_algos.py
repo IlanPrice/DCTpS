@@ -8,6 +8,7 @@ import scipy.sparse
 
 from code.mask_networks import apply_prune_mask
 from code.modules import DCTplusConv2d, DCTplusLinear
+from code.utils import calculate_layer_densities
 
 ######################################################################
 ############### Randomly prune given layer densities   ###############
@@ -36,6 +37,7 @@ def prune(net, densities, device):
     print("*** Total params in dense conv and linear layers:", param_count)
 
     return keep_masks
+
 
 
 # ************************ FORCE  (https://github.com/naver/force) ************************
@@ -91,7 +93,7 @@ def get_average_gradients(net, train_dataloader, device, num_batches=-1):
 
 def get_average_saliencies2(net, train_dataloader, device, prune_method=1, num_batches=-1):
     """
-    Get saliencies with averaged gradients, but now for the trainable variables in the DCT plus sparse layers
+    Get saliencies with averaged gradients, but now for the trainable variables in the DCT plus sparse layers. This is not used in the original paper's experiments
     """
 
     def pruning_criteria(number):
